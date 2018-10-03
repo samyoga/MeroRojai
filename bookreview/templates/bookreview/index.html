@@ -1,0 +1,12 @@
+{% if all_books %}
+
+    <ul>
+        {% for book in all_books %}
+        <li>
+            <a href = "/bookreview/{{ book.id }}/">{{book.book_title}}</a>
+        </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <h3>You don't have any Books</h3>
+{% endif %}

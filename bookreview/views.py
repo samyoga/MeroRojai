@@ -1,13 +1,14 @@
 from django.shortcuts import HttpResponse
+from django.template import loader
 from .models import Book, Movie
 
 def index(request):
     all_books = Book.objects.all()
-    html = ''
-    for book in all_books:
-        url = '/bookreview/' + str(book.id) + '/'
-        html += '<a href="' + url + '">' + book.book_title + '</a><br>'
-    return HttpResponse (html)
+    template = loader.get_template('bookreview/index.html')
+    context = {
+        'all_books' : all_books
+    }
+    return HttpResponse (template.render(context,request))
 
 def detail(request, book_id):
     return HttpResponse("<h2> details" + str(book_id) + "</h2>")
